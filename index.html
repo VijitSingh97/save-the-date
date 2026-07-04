@@ -55,33 +55,31 @@
   .corner.br{bottom:0; right:0}
   @media (max-height:560px) and (orientation:landscape){ .corner{display:none} }
 
-  /* ---------- the envelope cover ---------- */
-  .cover{position:fixed; inset:0; z-index:50; display:grid; place-items:center;
-    background:radial-gradient(120% 90% at 50% 40%, #fef7f1, #f6e2e8);
-    cursor:pointer; transition:opacity .85s ease .45s, transform 1s ease .45s;}
-  .cover.open{opacity:0; transform:translateY(48px) scale(1.1); pointer-events:none}
-  .envelope{position:relative; width:min(80vw,360px); aspect-ratio:3/2; perspective:1100px;
-    filter:drop-shadow(0 22px 40px rgba(120,50,75,.28));}
-  .envelope>div{position:absolute; inset:0; border-radius:12px}
-  .env-base{background:linear-gradient(160deg,#fbe0d9,#f4c8cf)}
-  .env-pocket{background:linear-gradient(160deg,#f7d3cd,#eeb9c2);
-    clip-path:polygon(0 100%,100% 100%,100% 30%,50% 66%,0 30%)}
-  .env-left{background:linear-gradient(120deg,#f9dad3,#f1c4cd); clip-path:polygon(0 26%,50% 62%,0 100%)}
-  .env-right{background:linear-gradient(240deg,#f9dad3,#f1c4cd); clip-path:polygon(100% 26%,50% 62%,100% 100%)}
-  .flap{transform-origin:top center; transform:rotateX(0deg); transition:transform .8s cubic-bezier(.6,.02,.3,1);
-    clip-path:polygon(0 0,100% 0,50% 72%); background:linear-gradient(170deg,#f6cdd4,#eeb2bd); z-index:6; backface-visibility:hidden}
-  .cover.open .flap{transform:rotateX(-172deg); z-index:1}
-  .bow{position:absolute; top:40%; left:50%; width:38%; transform:translate(-50%,-50%); z-index:8;
-    transition:opacity .35s ease, transform .5s ease}
-  .cover.open .bow{opacity:0; transform:translate(-50%,-50%) scale(.6)}
-  .envelope .monogram{position:absolute; top:auto; bottom:11%; left:0; right:0; height:auto; border-radius:0;
-    text-align:center; z-index:7; font-family:"Great Vibes",cursive; font-size:clamp(1.4rem,5vw,2rem); color:#9d2c60; transition:opacity .4s}
-  .cover.open .monogram{opacity:0}
-  .hint{position:absolute; left:0; right:0; bottom:-4.2rem; text-align:center; font-style:italic;
-    font-size:1.1rem; color:var(--mauve); letter-spacing:.04em; animation:pulse 2.2s ease-in-out infinite}
-  .cover.open .hint{opacity:0}
-  @keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
-  @media (prefers-reduced-motion:reduce){ .cover,.stage,.corner,.flap{transition:opacity .3s} }
+  /* ---------- full-page envelope cover ---------- */
+  .cover{position:fixed; inset:0; z-index:50; cursor:pointer; overflow:hidden; perspective:1800px;
+    transition:opacity 1s ease .5s;}
+  .cover.open{opacity:0; pointer-events:none;}
+  .cover .layer{position:absolute; inset:0;}
+  .env-base{background:linear-gradient(155deg,#f7f1e6 0%,#efe3d1 100%);}
+  .env-left{background:linear-gradient(88deg,#efe5d2,#e4d7bf); clip-path:polygon(0 0,50% 50%,0 100%);}
+  .env-right{background:linear-gradient(272deg,#efe5d2,#e4d7bf); clip-path:polygon(100% 0,50% 50%,100% 100%);}
+  .env-pocket{background:linear-gradient(175deg,#f3ebd9 0%,#e7dbc4 100%);
+    clip-path:polygon(0 100%,100% 100%,50% 47%); filter:drop-shadow(0 -5px 12px rgba(150,118,72,.12));}
+  .flap{transform-origin:top center; transform:rotateX(0deg); transition:transform 1.05s cubic-bezier(.5,0,.15,1);
+    background:linear-gradient(178deg,#f9f3e9 0%,#ece0cb 100%); clip-path:polygon(0 0,100% 0,50% 53%);
+    filter:drop-shadow(0 5px 11px rgba(140,105,58,.17)); z-index:6; backface-visibility:hidden;}
+  .cover.open .flap{transform:rotateX(-178deg); z-index:1;}
+  .seal{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:min(48vw,270px); z-index:8;
+    filter:drop-shadow(0 7px 11px rgba(120,88,38,.3)); transition:opacity .4s ease, transform .55s ease;}
+  .cover.open .seal{opacity:0; transform:translate(-50%,-50%) scale(.7);}
+  .env-names{position:absolute; left:0; right:0; top:64%; text-align:center; z-index:7;
+    font-family:"Great Vibes",cursive; font-size:clamp(2rem,7.5vw,3.2rem); color:#9d2c60; transition:opacity .4s;}
+  .cover.open .env-names{opacity:0;}
+  .hint{position:absolute; left:0; right:0; bottom:7%; text-align:center; font-style:italic; z-index:7;
+    font-size:1.05rem; color:#9a7b52; letter-spacing:.1em; text-transform:uppercase; animation:pulse 2.2s ease-in-out infinite;}
+  .cover.open .hint{opacity:0;}
+  @keyframes pulse{0%,100%{opacity:.45}50%{opacity:.95}}
+  @media (prefers-reduced-motion:reduce){ .cover,.stage,.corner,.flap,.seal{transition:opacity .3s;} }
 </style>
 </head>
 <body>
@@ -113,27 +111,44 @@
     </main>
   </div>
 
-  <!-- envelope cover: click to open -->
+  <!-- full-page envelope cover: click to open -->
   <div class="cover" id="cover" role="button" tabindex="0" aria-label="Open the save the date">
-    <div class="envelope">
-      <div class="env-base"></div>
-      <div class="env-left"></div>
-      <div class="env-right"></div>
-      <div class="env-pocket"></div>
-      <div class="monogram">R &amp; V</div>
-      <div class="flap"></div>
-      <svg class="bow" viewBox="0 0 120 96" aria-hidden="true">
-        <defs><linearGradient id="rib" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#ef9bb4"/><stop offset="1" stop-color="#b83f77"/></linearGradient></defs>
-        <path d="M60 40 C55 58 49 74 44 92 L58 84 L61 58Z" fill="url(#rib)"/>
-        <path d="M60 40 C65 58 71 74 76 92 L62 84 L59 58Z" fill="url(#rib)"/>
-        <path d="M60 44 C42 24 10 26 10 46 C10 66 44 64 60 48Z" fill="url(#rib)"/>
-        <path d="M60 44 C78 24 110 26 110 46 C110 66 76 64 60 48Z" fill="url(#rib)"/>
-        <path d="M60 44 C50 40 46 40 40 44 C46 48 50 48 60 48Z" fill="#8f1f52" opacity=".5"/>
-        <path d="M60 44 C70 40 74 40 80 44 C74 48 70 48 60 48Z" fill="#8f1f52" opacity=".5"/>
-        <rect x="52" y="36" width="16" height="20" rx="6" fill="#a81e63"/>
-      </svg>
-    </div>
+    <div class="layer env-base"></div>
+    <div class="layer env-left"></div>
+    <div class="layer env-right"></div>
+    <div class="layer env-pocket"></div>
+    <div class="env-names">Ridhiman &amp; Vijit</div>
+    <div class="layer flap"></div>
+    <svg class="seal" viewBox="0 0 240 180" aria-hidden="true">
+      <defs>
+        <linearGradient id="satin" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#f2dfa4"/><stop offset=".5" stop-color="#d5ae56"/><stop offset="1" stop-color="#b0862c"/>
+        </linearGradient>
+        <linearGradient id="satinD" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#bd9640"/><stop offset="1" stop-color="#8f6c20"/>
+        </linearGradient>
+        <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#fff7dd" stop-opacity="0"/><stop offset=".5" stop-color="#fff7dd" stop-opacity=".85"/><stop offset="1" stop-color="#fff7dd" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- tails -->
+      <path d="M118 96 C111 122 99 140 88 172 L99 158 L109 170 L124 100 Z" fill="url(#satin)"/>
+      <path d="M122 96 C129 122 141 140 152 172 L141 158 L131 170 L116 100 Z" fill="url(#satin)"/>
+      <path d="M116 104 C110 126 101 142 93 160" stroke="url(#sheen)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M124 104 C130 126 139 142 147 160" stroke="url(#sheen)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <!-- left loop -->
+      <path d="M120 78 C82 36 26 42 26 78 C26 108 82 100 120 86 Z" fill="url(#satin)"/>
+      <path d="M120 84 C96 82 72 84 54 92 C80 87 104 87 120 87 Z" fill="url(#satinD)"/>
+      <path d="M108 66 C80 46 44 50 34 74" stroke="url(#sheen)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- right loop -->
+      <path d="M120 78 C158 36 214 42 214 78 C214 108 158 100 120 86 Z" fill="url(#satin)"/>
+      <path d="M120 84 C144 82 168 84 186 92 C160 87 136 87 120 87 Z" fill="url(#satinD)"/>
+      <path d="M132 66 C160 46 196 50 206 74" stroke="url(#sheen)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- knot -->
+      <path d="M106 66 C114 61 126 61 134 66 C137 74 137 88 134 96 C126 101 114 101 106 96 C103 88 103 74 106 66 Z" fill="url(#satinD)"/>
+      <path d="M113 66 L113 96 M127 66 L127 96" stroke="#82611c" stroke-width="1.4" opacity=".5"/>
+      <path d="M108 70 C116 66 124 66 132 70" stroke="url(#sheen)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
     <p class="hint">Tap to open</p>
   </div>
 
