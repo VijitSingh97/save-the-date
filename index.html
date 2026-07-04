@@ -11,15 +11,16 @@
 <style>
   :root{
     /* EDIT: colors */
-    --ink:#6d2b3d;      /* deep rose — names & text */
-    --accent:#e0662a;   /* orange — eyebrow, button */
-    --muted:#c94f7c;    /* pink — location */
-    --pink:#ec4f8c; --red:#e5383b; --orange:#f4802a; --gold:#f6c343; --green:#6aa06b;
+    --ink:#7a0e2b;      /* deep bridal maroon — names & text */
+    --accent:#b8860b;   /* deep gold — eyebrow, borders */
+    --maroon:#9d1732;   /* filled button */
+    --muted:#c01a63;    /* rani pink — location */
+    --pink:#e6007e; --red:#c8102e; --orange:#f4802a; --gold:#e6b422; --green:#2f8f5b;
   }
   *{box-sizing:border-box;margin:0}
   html,body{height:100%}
   body{
-    background:linear-gradient(160deg,#fff2e6 0%,#ffe9ef 55%,#ffe3ea 100%);
+    background:linear-gradient(160deg,#fff2cf 0%,#ffe6cb 52%,#ffdfe0 100%);
     color:var(--ink);
     font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
     display:grid; place-items:center; min-height:100dvh; padding:2rem; text-align:center;
@@ -39,13 +40,13 @@
   .actions{display:flex; flex-wrap:wrap; gap:.8rem; justify-content:center}
   .cta{
     display:inline-block; margin-top:2rem; padding:.8rem 1.6rem;
-    border:1px solid var(--accent); border-radius:2rem; color:var(--accent);
+    border:1px solid var(--accent); border-radius:2rem; color:var(--ink);
     text-decoration:none; letter-spacing:.12em; text-transform:uppercase; font-size:.75rem;
     transition:background .2s,color .2s;
   }
   .cta:hover{background:var(--accent); color:#fff}
-  .cta.primary{background:var(--accent); color:#fff}
-  .cta.primary:hover{background:var(--muted); border-color:var(--muted)}
+  .cta.primary{background:var(--maroon); color:#ffe08a; border-color:var(--maroon)}
+  .cta.primary:hover{background:var(--ink); border-color:var(--ink); color:#ffe08a}
   .sprig{width:170px; aspect-ratio:2.9; margin:.5rem auto 0; display:block}
   /* Punjabi phulkari floral framing — all content injected procedurally each load */
   .field{position:fixed; inset:0; width:100vw; height:100vh; z-index:0; pointer-events:none; opacity:.9}
@@ -100,7 +101,7 @@
 const rnd = (a, b) => a + Math.random() * (b - a);
 const ri  = (a, b) => Math.floor(rnd(a, b + 1));
 const pick = a => a[Math.floor(Math.random() * a.length)];
-const BRIGHT = ['#d6266d', '#ec4f8c', '#f4802a', '#e5383b', '#f6a723', '#c02766', '#e0508a'];
+const BRIGHT = ['#c8102e', '#d6266d', '#e6007e', '#e0a80f', '#f4802a', '#a51c30', '#1f7a4d'];
 
 // marigold (genda) — layered petal rings; one <symbol> per colourway
 function marigoldSymbol(id, outer, mid, center, dot) {
@@ -113,10 +114,11 @@ function marigoldSymbol(id, outer, mid, center, dot) {
        + `<circle cx="30" cy="30" r="2.4" fill="${dot}"/></symbol>`;
 }
 const MARIS = [
-  ['mariO', '#f4802a', '#ffb43d', '#e5541f', '#ffe08a'],
-  ['mariR', '#e5383b', '#f4666a', '#a81f2c', '#ffd0d0'],
-  ['mariY', '#f6a723', '#ffca55', '#e5811f', '#fff0c0'],
-  ['mariP', '#ec4f8c', '#f47fae', '#c02766', '#ffd9e8'],
+  ['mariR', '#c8102e', '#f0556a', '#7a0e1f', '#ffd0b0'],  // bridal red
+  ['mariM', '#d6266d', '#ef5f9c', '#8f0f4e', '#ffd9e8'],  // rani magenta
+  ['mariG', '#e0a80f', '#ffcf4d', '#b57d00', '#fff0c0'],  // mustard gold
+  ['mariO', '#f4802a', '#ffb43d', '#e5541f', '#ffe08a'],  // marigold orange
+  ['mariF', '#e6007e', '#ff5fb0', '#a10057', '#ffd0ea'],  // fuchsia
 ];
 const MARI_IDS = MARIS.map(m => m[0]);
 
