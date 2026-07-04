@@ -60,14 +60,14 @@
     transition:opacity 1s ease .5s;}
   .cover.open{opacity:0; pointer-events:none;}
   .cover .layer{position:absolute; inset:0;}
-  .env-base{background:linear-gradient(155deg,#f7f1e6 0%,#efe3d1 100%);}
-  .env-left{background:linear-gradient(88deg,#efe5d2,#e4d7bf); clip-path:polygon(0 0,50% 50%,0 100%);}
-  .env-right{background:linear-gradient(272deg,#efe5d2,#e4d7bf); clip-path:polygon(100% 0,50% 50%,100% 100%);}
-  .env-pocket{background:linear-gradient(175deg,#f3ebd9 0%,#e7dbc4 100%);
-    clip-path:polygon(0 100%,100% 100%,50% 47%); filter:drop-shadow(0 -5px 12px rgba(150,118,72,.12));}
+  .env-base{background:linear-gradient(155deg,#f7e2e3 0%,#eccdd4 100%);}
+  .env-left{background:linear-gradient(88deg,#f1d3d9,#e5bfc9); clip-path:polygon(0 0,50% 50%,0 100%);}
+  .env-right{background:linear-gradient(272deg,#f1d3d9,#e5bfc9); clip-path:polygon(100% 0,50% 50%,100% 100%);}
+  .env-pocket{background:linear-gradient(175deg,#f4d9de 0%,#e7cad2 100%);
+    clip-path:polygon(0 100%,100% 100%,50% 47%); filter:drop-shadow(0 -5px 12px rgba(150,88,110,.13));}
   .flap{transform-origin:top center; transform:rotateX(0deg); transition:transform 1.05s cubic-bezier(.5,0,.15,1);
-    background:linear-gradient(178deg,#f9f3e9 0%,#ece0cb 100%); clip-path:polygon(0 0,100% 0,50% 53%);
-    filter:drop-shadow(0 5px 11px rgba(140,105,58,.17)); z-index:6; backface-visibility:hidden;}
+    background:linear-gradient(178deg,#fae9eb 0%,#efd3da 100%); clip-path:polygon(0 0,100% 0,50% 53%);
+    filter:drop-shadow(0 5px 11px rgba(150,88,110,.18)); z-index:6; backface-visibility:hidden;}
   .cover.open .flap{transform:rotateX(-178deg); z-index:1;}
   .seal{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:min(48vw,270px); z-index:8;
     filter:drop-shadow(0 7px 11px rgba(120,88,38,.3)); transition:opacity .4s ease, transform .55s ease;}
@@ -76,7 +76,7 @@
     font-family:"Great Vibes",cursive; font-size:clamp(2rem,7.5vw,3.2rem); color:#9d2c60; transition:opacity .4s;}
   .cover.open .env-names{opacity:0;}
   .hint{position:absolute; left:0; right:0; bottom:7%; text-align:center; font-style:italic; z-index:7;
-    font-size:1.05rem; color:#9a7b52; letter-spacing:.1em; text-transform:uppercase; animation:pulse 2.2s ease-in-out infinite;}
+    font-size:1.05rem; color:#a76a86; letter-spacing:.1em; text-transform:uppercase; animation:pulse 2.2s ease-in-out infinite;}
   .cover.open .hint{opacity:0;}
   @keyframes pulse{0%,100%{opacity:.45}50%{opacity:.95}}
   @media (prefers-reduced-motion:reduce){ .cover,.stage,.corner,.flap,.seal{transition:opacity .3s;} }
