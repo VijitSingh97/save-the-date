@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <!-- petal shapes, tip pointing up, base at origin -->
+    <path id="mp" d="M0 0 C-7 -14 -7 -30 0 -38 C7 -30 7 -14 0 0 Z"/>
+    <path id="rp" d="M0 0 C-13 -11 -13 -27 0 -31 C13 -27 13 -11 0 0 Z"/>
+
+    <linearGradient id="marO" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#c23a06"/>
+      <stop offset=".55" stop-color="#f07a17"/>
+      <stop offset="1" stop-color="#ffc24d"/>
+    </linearGradient>
+    <linearGradient id="marI" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#a82e04"/>
+      <stop offset="1" stop-color="#e8850f"/>
+    </linearGradient>
+    <radialGradient id="marC" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#8a2402"/>
+      <stop offset="1" stop-color="#c85408"/>
+    </radialGradient>
+
+    <radialGradient id="roseR" cx=".42" cy=".38" r=".7">
+      <stop offset="0" stop-color="#f0616a"/>
+      <stop offset=".55" stop-color="#c81830"/>
+      <stop offset="1" stop-color="#7d0f1e"/>
+    </radialGradient>
+    <radialGradient id="roseRc" cx=".5" cy=".5" r=".6">
+      <stop offset="0" stop-color="#ff8a8f"/>
+      <stop offset="1" stop-color="#a5122a"/>
+    </radialGradient>
+
+    <radialGradient id="roseP" cx=".42" cy=".38" r=".7">
+      <stop offset="0" stop-color="#ffb3c6"/>
+      <stop offset=".55" stop-color="#ec5f8f"/>
+      <stop offset="1" stop-color="#b32a63"/>
+    </radialGradient>
+    <radialGradient id="rosePc" cx=".5" cy=".5" r=".6">
+      <stop offset="0" stop-color="#ffd0dd"/>
+      <stop offset="1" stop-color="#cf4079"/>
+    </radialGradient>
+
+    <linearGradient id="leaf" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#1f5c2e"/>
+      <stop offset="1" stop-color="#5aa15a"/>
+    </linearGradient>
+    <linearGradient id="leafD" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#17471f"/>
+      <stop offset="1" stop-color="#3d7d40"/>
+    </linearGradient>
+
+    <!-- reusable marigold: ~34px radius, drawn at origin -->
+    <g id="marigold">
+      <use href="#mp" fill="url(#marI)" transform="rotate(0)   scale(.62)"/>
+      <use href="#mp" fill="url(#marI)" transform="rotate(36)  scale(.62)"/>
+      <use href="#mp" fill="url(#marI)" transform="rotate(72)  scale(.62)"/>
+      <use href="#mp" fill="url(#marI)" transform="rotate(108) scale(.62)"/>
+      <use href="#mp" fill="url(#marI)" transform="rotate(144) scale(.62)"/>
+      <use href="#mp" fill="url(#marI)" transform="rotate(180) scale(.62)"/>
+      <use href="#mp" fill="url(#marI)" transform="rotate(216) scale(.62)"/>
+      <use href="#mp" fill="url(#marI)" transform="rotate(252) scale(.62)"/>
+      <use href="#mp" fill="url(#marI)" transform="rotate(288) scale(.62)"/>
+      <use href="#mp" fill="url(#marI)" transform="rotate(324) scale(.62)"/>
+      <use href="#mp" fill="url(#marO)" transform="rotate(18)"/>
+      <use href="#mp" fill="url(#marO)" transform="rotate(48)"/>
+      <use href="#mp" fill="url(#marO)" transform="rotate(78)"/>
+      <use href="#mp" fill="url(#marO)" transform="rotate(108)"/>
+      <use href="#mp" fill="url(#marO)" transform="rotate(138)"/>
+      <use href="#mp" fill="url(#marO)" transform="rotate(168)"/>
+      <use href="#mp" fill="url(#marO)" transform="rotate(198)"/>
+      <use href="#mp" fill="url(#marO)" transform="rotate(228)"/>
+      <use href="#mp" fill="url(#marO)" transform="rotate(258)"/>
+      <use href="#mp" fill="url(#marO)" transform="rotate(288)"/>
+      <use href="#mp" fill="url(#marO)" transform="rotate(318)"/>
+      <use href="#mp" fill="url(#marO)" transform="rotate(348)"/>
+      <circle r="8" fill="url(#marC)"/>
+      <circle r="8" fill="none" stroke="#ffcf6a" stroke-width="1" stroke-dasharray="1.2 2.4" opacity=".7"/>
+    </g>
+
+    <!-- reusable rose: fill set per instance -->
+    <g id="rose">
+      <use href="#rp" transform="rotate(0)"/>
+      <use href="#rp" transform="rotate(72)"/>
+      <use href="#rp" transform="rotate(144)"/>
+      <use href="#rp" transform="rotate(216)"/>
+      <use href="#rp" transform="rotate(288)"/>
+      <use href="#rp" transform="rotate(36)  scale(.66)"/>
+      <use href="#rp" transform="rotate(108) scale(.66)"/>
+      <use href="#rp" transform="rotate(180) scale(.66)"/>
+      <use href="#rp" transform="rotate(252) scale(.66)"/>
+      <use href="#rp" transform="rotate(324) scale(.66)"/>
+    </g>
+
+    <g id="leafspray">
+      <path d="M0 0 C-16 -6 -30 -18 -34 -40 C-16 -34 -4 -22 0 0 Z" fill="url(#leafD)"/>
+      <path d="M0 0 C4 -18 2 -38 -8 -54 C14 -40 20 -18 0 0 Z" fill="url(#leaf)"/>
+      <path d="M0 0 C16 -8 32 -16 44 -32 C24 -32 8 -20 0 0 Z" fill="url(#leafD)"/>
+    </g>
+  </defs>
+
+  <!-- corner bouquet, anchored to top-left, trailing along both edges -->
+  <g>
+    <use href="#leafspray" transform="translate(70 34) rotate(20) scale(1.15)"/>
+    <use href="#leafspray" transform="translate(34 70) rotate(70) scale(1.15)"/>
+
+    <use href="#marigold" transform="translate(120 40) scale(.85)"/>
+    <use href="#marigold" transform="translate(40 120) scale(.85)"/>
+
+    <g transform="translate(58 58) scale(1.35)">
+      <use href="#rose" fill="url(#roseR)"/>
+      <circle r="9" fill="url(#roseRc)"/>
+      <path d="M-6 -3 A7 7 0 0 1 6 -1" fill="none" stroke="#7d0f1e" stroke-width="1.4" opacity=".5"/>
+    </g>
+
+    <g transform="translate(100 100) scale(1)">
+      <use href="#rose" fill="url(#roseP)"/>
+      <circle r="8" fill="url(#rosePc)"/>
+    </g>
+
+    <use href="#marigold" transform="translate(150 78) scale(.5)"/>
+    <use href="#marigold" transform="translate(78 150) scale(.5)"/>
+  </g>
+</svg>
