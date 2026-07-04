@@ -75,18 +75,25 @@
       <circle r="8" fill="none" stroke="#ffcf6a" stroke-width="1" stroke-dasharray="1.2 2.4" opacity=".7"/>
     </g>
 
-    <!-- reusable rose: fill set per instance -->
+    <!-- reusable cabbage rose: three whorls of petals, fill set per instance -->
     <g id="rose">
       <use href="#rp" transform="rotate(0)"/>
-      <use href="#rp" transform="rotate(72)"/>
-      <use href="#rp" transform="rotate(144)"/>
-      <use href="#rp" transform="rotate(216)"/>
-      <use href="#rp" transform="rotate(288)"/>
-      <use href="#rp" transform="rotate(36)  scale(.66)"/>
-      <use href="#rp" transform="rotate(108) scale(.66)"/>
-      <use href="#rp" transform="rotate(180) scale(.66)"/>
-      <use href="#rp" transform="rotate(252) scale(.66)"/>
-      <use href="#rp" transform="rotate(324) scale(.66)"/>
+      <use href="#rp" transform="rotate(60)"/>
+      <use href="#rp" transform="rotate(120)"/>
+      <use href="#rp" transform="rotate(180)"/>
+      <use href="#rp" transform="rotate(240)"/>
+      <use href="#rp" transform="rotate(300)"/>
+      <use href="#rp" transform="rotate(30)  scale(.74)"/>
+      <use href="#rp" transform="rotate(90)  scale(.74)"/>
+      <use href="#rp" transform="rotate(150) scale(.74)"/>
+      <use href="#rp" transform="rotate(210) scale(.74)"/>
+      <use href="#rp" transform="rotate(270) scale(.74)"/>
+      <use href="#rp" transform="rotate(330) scale(.74)"/>
+      <use href="#rp" transform="rotate(0)   scale(.48)"/>
+      <use href="#rp" transform="rotate(72)  scale(.48)"/>
+      <use href="#rp" transform="rotate(144) scale(.48)"/>
+      <use href="#rp" transform="rotate(216) scale(.48)"/>
+      <use href="#rp" transform="rotate(288) scale(.48)"/>
     </g>
 
     <g id="leafspray">
