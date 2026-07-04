@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ===== EDIT THESE ===== -->
+<title>Save the Date</title>
+<meta property="og:title" content="Save the Date — Vijit & Ridhiman">
+<meta property="og:description" content="We're getting married! February 27, 2027.">
+<meta name="theme-color" content="#7a6a53">
+<style>
+  :root{
+    /* EDIT: colors */
+    --bg:#f7f3ee; --ink:#33302b; --accent:#7a6a53; --line:#d8cfc1;
+  }
+  *{box-sizing:border-box;margin:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    display:grid; place-items:center; min-height:100dvh; padding:2rem; text-align:center;
+    -webkit-font-smoothing:antialiased;
+  }
+  .card{max-width:34rem; animation:rise .9s ease both}
+  @keyframes rise{from{opacity:0; transform:translateY(12px)}to{opacity:1}}
+  .eyebrow{letter-spacing:.35em; text-transform:uppercase; font-size:.72rem; color:var(--accent)}
+  .names{font-size:clamp(2.6rem,9vw,4.5rem); line-height:1.05; margin:1.2rem 0}
+  .amp{display:block; font-style:italic; font-size:.5em; color:var(--accent); margin:.15em 0}
+  .rule{width:3rem; height:1px; background:var(--line); margin:1.6rem auto}
+  .line{font-size:1.15rem; margin:.4rem 0}
+  .date{font-size:1.5rem; letter-spacing:.02em}
+  .muted{color:var(--accent)}
+  .cta{
+    display:inline-block; margin-top:2rem; padding:.8rem 1.6rem;
+    border:1px solid var(--accent); border-radius:2rem; color:var(--accent);
+    text-decoration:none; letter-spacing:.12em; text-transform:uppercase; font-size:.75rem;
+    transition:background .2s,color .2s;
+  }
+  .cta:hover{background:var(--accent); color:var(--bg)}
+  .footnote{margin-top:1.6rem; font-size:.85rem; color:var(--accent)}
+  /* floral corners */
+  .floral{position:fixed; width:min(30vw,200px); aspect-ratio:1; color:var(--accent); opacity:.55; pointer-events:none}
+  .tl{top:0; left:0}
+  .tr{top:0; right:0; transform:scaleX(-1)}
+  .bl{bottom:0; left:0; transform:scaleY(-1)}
+  .br{bottom:0; right:0; transform:scale(-1)}
+  .sprig{width:64px; color:var(--accent); margin:.4rem auto 0; display:block}
+  /* short viewports (landscape phones): florals would collide with centered text */
+  @media (max-height:520px){
+    .floral{display:none}
+    body{place-items:start center; padding-block:1.5rem}
+    .names{font-size:clamp(2rem,7vw,3rem); margin:.6rem 0}
+  }
+</style>
+</head>
+<body>
+  <!-- floral spray defined once, reused in 4 corners via CSS transforms -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <symbol id="f" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M8 8 C60 30 95 60 120 120 C132 148 150 168 190 182" stroke-linecap="round"/>
+      <path d="M60 34 C40 40 30 58 34 78 C52 74 64 58 60 34Z" fill="currentColor" fill-opacity=".18"/>
+      <path d="M96 62 C112 48 134 46 150 56 C136 72 114 74 96 62Z" fill="currentColor" fill-opacity=".18"/>
+      <path d="M116 108 C110 130 118 152 138 164 C146 142 138 120 116 108Z" fill="currentColor" fill-opacity=".18"/>
+      <path d="M28 70 C10 78 4 98 12 116 C30 108 36 88 28 70Z" fill="currentColor" fill-opacity=".18"/>
+      <g fill="currentColor" fill-opacity=".55">
+        <circle cx="34" cy="18" r="4"/><circle cx="26" cy="10" r="3"/><circle cx="42" cy="12" r="3"/>
+        <circle cx="34" cy="26" r="3"/><circle cx="26" cy="24" r="2.5"/><circle cx="42" cy="24" r="2.5"/>
+      </g>
+      <g fill="currentColor" fill-opacity=".55">
+        <circle cx="150" cy="150" r="4"/><circle cx="142" cy="142" r="3"/><circle cx="158" cy="144" r="3"/>
+        <circle cx="150" cy="158" r="3"/><circle cx="142" cy="156" r="2.5"/><circle cx="158" cy="156" r="2.5"/>
+      </g>
+    </symbol>
+    <symbol id="sprig" viewBox="0 0 120 40" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M60 6 C60 20 60 28 60 36" stroke-linecap="round"/>
+      <path d="M60 14 C48 10 40 12 34 20 C44 24 54 22 60 14Z" fill="currentColor" fill-opacity=".2"/>
+      <path d="M60 14 C72 10 80 12 86 20 C76 24 66 22 60 14Z" fill="currentColor" fill-opacity=".2"/>
+      <path d="M60 24 C50 22 44 24 40 30 C48 33 56 31 60 24Z" fill="currentColor" fill-opacity=".2"/>
+      <path d="M60 24 C70 22 76 24 80 30 C72 33 64 31 60 24Z" fill="currentColor" fill-opacity=".2"/>
+      <circle cx="60" cy="6" r="4" fill="currentColor" fill-opacity=".55"/>
+    </symbol>
+  </defs></svg>
+  <svg class="floral tl" aria-hidden="true"><use href="#f"/></svg>
+  <svg class="floral tr" aria-hidden="true"><use href="#f"/></svg>
+  <svg class="floral bl" aria-hidden="true"><use href="#f"/></svg>
+  <svg class="floral br" aria-hidden="true"><use href="#f"/></svg>
+
+  <main class="card">
+    <p class="eyebrow">Save the Date</p>
+    <!-- EDIT: names -->
+    <h1 class="names">Vijit<span class="amp">and</span>Ridhiman</h1>
+    <svg class="sprig" aria-hidden="true" style="aspect-ratio:3"><use href="#sprig"/></svg>
+    <!-- EDIT: date + place -->
+    <p class="line date">Saturday, February 27, 2027</p>
+    <p class="line muted">Panchkula, Haryana</p>
+    <p class="line">Formal invitation to follow</p>
+
+    <!-- EDIT the calendar link's dates (YYYYMMDD) & details -->
+    <a class="cta" target="_blank" rel="noopener"
+       href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Vijit%20%26%20Ridhiman%27s%20Wedding&dates=20270227/20270228&details=Save%20the%20date%21%20Formal%20invitation%20to%20follow.&location=Panchkula%2C%20Haryana">
+      Add to calendar
+    </a>
+  </main>
+</body>
+</html>
