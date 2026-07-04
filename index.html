@@ -40,6 +40,9 @@
     transition:background .2s,color .2s;
   }
   .cta:hover{background:var(--accent); color:#fff}
+  .actions{display:flex; flex-wrap:wrap; gap:.8rem; justify-content:center}
+  .cta.primary{background:var(--accent); color:#fff}
+  .cta.primary:hover{background:var(--muted); border-color:var(--muted)}
   /* floral corners */
   .floral{position:fixed; width:min(34vw,230px); aspect-ratio:1; opacity:.95; pointer-events:none}
   .tl{top:0; left:0}
@@ -118,11 +121,15 @@
     <p class="line muted">Panchkula, Haryana</p>
     <p class="line">Formal invitation to follow</p>
 
-    <!-- EDIT the calendar link's dates (YYYYMMDD) & details -->
-    <a class="cta" target="_blank" rel="noopener"
-       href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ridhiman%20%26%20Vijit%27s%20Wedding&dates=20270227/20270228&details=Save%20the%20date%21%20Formal%20invitation%20to%20follow.&location=Panchkula%2C%20Haryana">
-      Add to calendar
-    </a>
+    <div class="actions">
+      <!-- EDIT the calendar link's dates (YYYYMMDD) & details -->
+      <a class="cta" target="_blank" rel="noopener"
+         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ridhiman%20%26%20Vijit%27s%20Wedding&dates=20270227/20270228&details=Save%20the%20date%21%20Formal%20invitation%20to%20follow.&location=Panchkula%2C%20Haryana">
+        Add to calendar
+      </a>
+      <!-- EDIT: replace with the real RSVP phone number (keep the tel: and +country code) -->
+      <a class="cta primary" href="tel:+919781274023">RSVP — Call us</a>
+    </div>
   </main>
 </body>
 </html>
