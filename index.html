@@ -23,7 +23,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-  :root{ --navy:#3a3350; --mauve:#64506e; --rose1:#d6297a; --rose2:#a81e63; --btn:#b83f77; }
+  :root{ --navy:#3a3350; --mauve:#64506e; --rose1:#d6297a; --rose2:#a81e63; --btn:#b83f77;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace; }
   *{box-sizing:border-box;margin:0}
   html,body{height:100%}
   body{
@@ -128,44 +129,88 @@
     100%{opacity:0; transform:translate3d(var(--sway),106vh,0) rotate(var(--rot))}
   }
 
-  /* ---------- full-page envelope cover ---------- */
-  .cover{position:fixed; inset:0; z-index:50; cursor:pointer; overflow:hidden; perspective:1800px;
+  /* ---------- full-page cover: a cute envelope, floating ---------- */
+  .cover{position:fixed; inset:0; z-index:50; cursor:pointer; overflow:hidden;
+    display:grid; place-items:center;
+    background:linear-gradient(165deg,#fdf5ef 0%,#fbeef0 55%,#f8e7ec 100%);
     transition:opacity 1s ease .5s;}
+  .cover::before{content:""; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(58% 46% at 50% 46%, rgba(255,255,255,.6), transparent 72%);}
   .cover.open{opacity:0; pointer-events:none;}
-  .cover .layer{position:absolute; inset:0;}
-  .env-base{background:linear-gradient(155deg,#f7e2e3 0%,#eccdd4 100%);}
-  .env-left{background:linear-gradient(88deg,#f1d3d9,#e5bfc9); clip-path:polygon(0 0,50% 50%,0 100%);}
-  .env-right{background:linear-gradient(272deg,#f1d3d9,#e5bfc9); clip-path:polygon(100% 0,50% 50%,100% 100%);}
-  .env-pocket{background:linear-gradient(175deg,#f4d9de 0%,#e7cad2 100%);
-    clip-path:polygon(0 100%,100% 100%,50% 47%); filter:drop-shadow(0 -5px 12px rgba(150,88,110,.13));}
-  .flap{transform-origin:top center; transform:rotateX(0deg); transition:transform 1.05s cubic-bezier(.5,0,.15,1);
-    background:linear-gradient(178deg,#fae9eb 0%,#efd3da 100%); clip-path:polygon(0 0,100% 0,50% 53%);
-    filter:drop-shadow(0 5px 11px rgba(150,88,110,.18)); z-index:6; backface-visibility:hidden;}
-  .cover.open .flap{transform:rotateX(-178deg); z-index:1;}
-  /* slow diagonal light sweep across the whole envelope */
-  .sheen{position:absolute; inset:-40%; z-index:9; pointer-events:none;
-    background:linear-gradient(115deg,transparent 43%,rgba(255,255,255,.22) 50%,transparent 57%);
+
+  .envelope{position:relative; width:min(90vw,560px); aspect-ratio:10/7; perspective:1400px;
+    transition:transform .8s cubic-bezier(.19,.75,.28,1);}
+  .envelope:hover{transform:translateY(-5px)}
+  .cover.open .envelope{transform:translateY(24px) scale(.97)}
+
+  .env-body{position:absolute; inset:0; border-radius:14px; overflow:hidden;
+    background:linear-gradient(160deg,#fbe7ea 0%,#f3d7de 100%);
+    box-shadow:0 26px 50px -18px rgba(150,60,95,.42), 0 6px 16px rgba(150,60,95,.15);}
+  .env-side{position:absolute; inset:0; z-index:1; background:linear-gradient(90deg,#f6dde2,#eccbd4);}
+  .env-side.left{clip-path:polygon(0 0,44% 50%,0 100%)}
+  .env-side.right{clip-path:polygon(100% 0,56% 50%,100% 100%); background:linear-gradient(270deg,#f6dde2,#eccbd4)}
+  .env-pocket{position:absolute; inset:0; z-index:2;
+    background:linear-gradient(175deg,#f9e2e7 0%,#eed0d9 100%);
+    clip-path:polygon(0 100%,100% 100%,100% 60%,50% 48%,0 60%);
+    filter:drop-shadow(0 -4px 9px rgba(150,88,110,.14));}
+  /* polka-dot lining peeks out once the flap lifts */
+  .env-lining{position:absolute; inset:0; z-index:3;
+    background-color:#fdf0f2;
+    background-image:radial-gradient(rgba(214,41,122,.3) 1.6px, transparent 1.7px);
+    background-size:15px 15px;
+    clip-path:polygon(0 0,100% 0,50% 40%);}
+  .stamp{position:absolute; top:7%; right:5.5%; z-index:4; width:clamp(58px,15vw,84px); aspect-ratio:4/5;
+    background:#fffdf8; border-radius:6px; transform:rotate(3.5deg);
+    box-shadow:0 3px 8px rgba(120,40,70,.18);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; padding:9px 7px;}
+  .stamp::before{content:""; position:absolute; inset:4px; border:1.5px solid rgba(184,63,119,.38); border-radius:3px}
+  .stamp svg{width:58%; height:auto}
+  .stamp span{font-family:var(--mono); font-size:clamp(.5rem,1.6vw,.62rem); letter-spacing:.08em; color:var(--mauve)}
+  .postmark{position:absolute; top:5%; right:17%; z-index:5; width:clamp(86px,23vw,124px); height:auto;
+    color:var(--navy); opacity:.42; transform:rotate(-9deg); pointer-events:none;}
+  .sheen{position:absolute; inset:-40%; z-index:6; pointer-events:none;
+    background:linear-gradient(115deg,transparent 43%,rgba(255,255,255,.26) 50%,transparent 57%);
     transform:translateX(-65%); animation:sweep 6.5s ease-in-out infinite;}
   @keyframes sweep{0%,52%{transform:translateX(-65%)}88%,100%{transform:translateX(65%)}}
+  .flap{position:absolute; inset:0; z-index:7; transform-origin:top center; transform:rotateX(0deg);
+    transition:transform 1.05s cubic-bezier(.5,0,.15,1);
+    background:linear-gradient(178deg,#fceef0 0%,#f2d8de 100%);
+    clip-path:polygon(0 3%,2.5% 0,97.5% 0,100% 3%,50% 40%);
+    filter:drop-shadow(0 5px 10px rgba(150,88,110,.2)); backface-visibility:hidden;}
+  .cover.open .flap{transform:rotateX(-178deg); z-index:1;}
+  /* commit-message address block */
+  .addr{position:absolute; left:0; right:0; top:63%; z-index:6; text-align:center; line-height:1.45;
+    transition:opacity .4s;}
+  .addr .k{font-family:var(--mono); color:#b06a8c}
+  .addr .a1,.addr .a3{font-family:var(--mono); font-size:clamp(.68rem,2.2vw,.85rem); color:var(--mauve); letter-spacing:.02em}
+  .addr .a2{margin:.1em 0}
+  .addr .sc{font-family:"Great Vibes",cursive; font-size:clamp(1.4rem,5.5vw,2.05rem); color:#9d2c60;
+    text-shadow:0 1px 0 rgba(255,255,255,.6)}
+  .cover.open .addr{opacity:0}
   /* warm halo breathing behind the seal */
-  .seal-halo{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:7; pointer-events:none;
-    width:min(78vw,430px); aspect-ratio:1; border-radius:50%;
-    background:radial-gradient(circle, rgba(255,236,228,.75) 0%, rgba(255,236,228,0) 65%);
+  .seal-halo{position:absolute; top:42%; left:50%; transform:translate(-50%,-50%); z-index:8; pointer-events:none;
+    width:clamp(150px,44vw,250px); aspect-ratio:1; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,236,228,.8) 0%, rgba(255,236,228,0) 65%);
     animation:halo 3.4s ease-in-out infinite;}
   @keyframes halo{50%{transform:translate(-50%,-50%) scale(1.08); opacity:.8}}
-  .seal{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:min(48vw,270px); z-index:8;
-    filter:drop-shadow(0 7px 13px rgba(110,20,45,.32));
+  .seal{position:absolute; top:42%; left:50%; transform:translate(-50%,-50%); z-index:9;
+    width:clamp(88px,24vw,138px);
+    filter:drop-shadow(0 6px 11px rgba(110,20,45,.32));
     transition:opacity .4s ease, transform .55s ease;
     animation:breathe 3.4s ease-in-out infinite;}
-  @keyframes breathe{50%{transform:translate(-50%,-50%) scale(1.03)}}
+  @keyframes breathe{50%{transform:translate(-50%,-50%) scale(1.035)}}
   .cover.open .seal{animation:none; opacity:0; transform:translate(-50%,-50%) scale(.7);}
   .cover.open .seal-halo,.cover.open .sheen{opacity:0; transition:opacity .4s}
-  .env-names{position:absolute; left:0; right:0; top:64%; text-align:center; z-index:7;
-    font-family:"Great Vibes",cursive; font-size:clamp(2rem,7.5vw,3.2rem); color:#9d2c60; transition:opacity .4s;
-    text-shadow:0 1px 0 rgba(255,255,255,.6);}
-  .cover.open .env-names{opacity:0;}
-  .hint{position:absolute; left:0; right:0; bottom:7%; text-align:center; font-style:italic; z-index:7;
-    font-size:1.05rem; color:#a76a86; letter-spacing:.1em; text-transform:uppercase; animation:pulse 2.2s ease-in-out infinite;}
+  /* little sparkles around the envelope */
+  .spark{position:absolute; z-index:2; pointer-events:none; color:#e8850f; font-size:clamp(12px,3vw,19px);
+    animation:twinkle 3s ease-in-out infinite;}
+  .spark.s1{top:-26px; left:-10px}
+  .spark.s2{right:-22px; top:26%; color:var(--rose1); animation-delay:1s}
+  .spark.s3{left:-26px; bottom:14%; color:#d6297a; animation-delay:2s; font-size:clamp(10px,2.4vw,15px)}
+  @keyframes twinkle{0%,100%{opacity:.15; transform:scale(.7) rotate(0deg)}50%{opacity:.95; transform:scale(1.15) rotate(25deg)}}
+  .hint{position:absolute; left:0; right:0; bottom:6%; text-align:center; z-index:7;
+    font-family:var(--mono); font-size:clamp(.82rem,2.6vw,.98rem); color:#a76a86; letter-spacing:.05em;
+    animation:pulse 2.2s ease-in-out infinite;}
   .cover.open .hint{opacity:0;}
   @keyframes pulse{0%,100%{opacity:.45}50%{opacity:.95}}
 
@@ -181,7 +226,7 @@
   }
   @media (prefers-reduced-motion:reduce){
     .cover,.stage,.corner,.flap,.seal{transition:opacity .3s;}
-    .names,.seal,.seal-halo,.sheen,.cta.primary::after,.hint{animation:none}
+    .names,.seal,.seal-halo,.sheen,.cta.primary::after,.hint,.spark{animation:none}
     .card>*{transition:opacity .4s; transform:none}
     .corner{transition:opacity .4s; }
   }
@@ -226,18 +271,54 @@
     </main>
   </div>
 
-  <!-- full-page envelope cover: click to open -->
+  <!-- full-page cover: a floating envelope, click to open -->
   <div class="cover" id="cover" role="button" tabindex="0" aria-label="Open the save the date">
-    <div class="layer env-base"></div>
-    <div class="layer env-left"></div>
-    <div class="layer env-right"></div>
-    <div class="layer env-pocket"></div>
-    <div class="env-names">Ridhiman &amp; Vijit</div>
-    <div class="layer flap"></div>
-    <div class="seal-halo" aria-hidden="true"></div>
-    <picture><source srcset="assets/seal.webp" type="image/webp"><img class="seal" src="assets/seal.png" alt="" aria-hidden="true"></picture>
-    <div class="sheen" aria-hidden="true"></div>
-    <p class="hint">Tap to open</p>
+    <div class="envelope">
+      <span class="spark s1" aria-hidden="true">&#10022;</span>
+      <span class="spark s2" aria-hidden="true">&#10022;</span>
+      <span class="spark s3" aria-hidden="true">&#10022;</span>
+      <div class="env-body">
+        <div class="env-side left"></div>
+        <div class="env-side right"></div>
+        <div class="env-pocket"></div>
+        <div class="env-lining"></div>
+        <div class="stamp" aria-hidden="true">
+          <svg viewBox="0 0 40 40">
+            <g transform="translate(20 20)">
+              <g fill="#e8850f">
+                <ellipse rx="4.5" ry="10" transform="rotate(0)"/><ellipse rx="4.5" ry="10" transform="rotate(45)"/>
+                <ellipse rx="4.5" ry="10" transform="rotate(90)"/><ellipse rx="4.5" ry="10" transform="rotate(135)"/>
+              </g>
+              <circle r="4.6" fill="#c23a06"/>
+            </g>
+          </svg>
+          <span>27.02.27</span>
+        </div>
+        <svg class="postmark" viewBox="0 0 150 84" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M4 30 q9 -7 18 0 t18 0 t18 0"/>
+            <path d="M4 42 q9 -7 18 0 t18 0 t18 0"/>
+            <path d="M4 54 q9 -7 18 0 t18 0 t18 0"/>
+            <circle cx="110" cy="42" r="33"/>
+            <circle cx="110" cy="42" r="27"/>
+          </g>
+          <g fill="currentColor" font-family="ui-monospace,Menlo,monospace" text-anchor="middle">
+            <text x="110" y="39" font-size="11">PANCHKULA</text>
+            <text x="110" y="52" font-size="10">27.02.2027</text>
+          </g>
+        </svg>
+        <div class="sheen" aria-hidden="true"></div>
+      </div>
+      <div class="flap"></div>
+      <div class="addr">
+        <div class="a1"><span class="k">to:</span> you</div>
+        <div class="a2"><span class="k">from:</span> <span class="sc">Ridhiman &amp; Vijit</span></div>
+        <div class="a3"><span class="k">re:</span> forever <span class="k">&middot;</span> 27.02.2027</div>
+      </div>
+      <div class="seal-halo" aria-hidden="true"></div>
+      <picture><source srcset="assets/seal.webp" type="image/webp"><img class="seal" src="assets/seal.png" alt="" aria-hidden="true"></picture>
+    </div>
+    <p class="hint">// tap to open</p>
   </div>
 
 <script>
